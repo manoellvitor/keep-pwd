@@ -1,10 +1,18 @@
 const mongoose = require("mongoose")
 
 const passwordSchema = new mongoose.Schema({
-    _id:    Schema.types.ObjectId,
-    title:  String,
-    description:    String,
-    password:   String,
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model("Pwd", passwordSchema)
