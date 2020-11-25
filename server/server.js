@@ -13,6 +13,11 @@ const app = express()
 app.use(helmet())
 app.use(express.json())
 
+// Routes
+const pwdRoutes = require("./routes/pwdRouter")
+app.use("/api/v1.0", pwdRoutes)
+
+
 // Start the Server
 try {
     app.listen(process.env.PORT | 3000, () => {
