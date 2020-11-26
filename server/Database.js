@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Connect to the DB
-const connectDatabase () => {
+const connectDatabase = () => {
     mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@graphql-api.fyhgt.mongodb.net/keep-pwd?retryWrites=true&w=majority`,

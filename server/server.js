@@ -7,7 +7,7 @@ const connectDatabase = require("./Database");
 // .ENV file to keep all the configure wee need
 require("dotenv").config();
 
-// Defining the server
+// Instance off express
 const app = express();
 
 // Middlewares
@@ -18,14 +18,20 @@ app.use(express.json());
 const pwdRoutes = require("./routes/pwdRouter");
 app.use("/api/v1.0", pwdRoutes);
 
-// Start the Server
-try {
-  app.listen(process.env.PORT | 3000, () => {
-    console.log(`Server Running at: http://localhost:${process.env.PORT}`);
-  });
-} catch (err) {
-  throw boom.boomify(err);
+// Defining the Server
+const startServer = () => {
+    try {
+        app.listen(process.env.PORT | 3000, () => {
+            console.log(`Server Running at: http://localhost:${process.env.PORT}`);
+        });
+    } catch (err) {
+        throw boom.boomify(err);
+    }
 }
 
+
+// Starting the Server
+startServer()
+
 // Connect to Database
-connectDatabase.connectDatabase();
+connectDatabase();
