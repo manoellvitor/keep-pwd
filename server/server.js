@@ -1,5 +1,6 @@
 const express = require("express");
 const helmet = require("helmet");
+const cors = require("cors");
 const boom = require("@hapi/boom");
 
 const connectDatabase = require("./Database");
@@ -13,6 +14,7 @@ const app = express();
 // Middlewares
 app.use(helmet());
 app.use(express.json());
+app.use(cors());
 
 // Routes
 const pwdRoutes = require("./routes/pwdRouter");
@@ -31,7 +33,7 @@ const startServer = () => {
 
 
 // Starting the Server
-startServer()
+startServer();
 
 // Connect to Database
 connectDatabase();

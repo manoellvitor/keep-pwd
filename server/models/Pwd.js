@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Password Schema
 const passwordSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -10,7 +11,7 @@ const passwordSchema = new mongoose.Schema({
     required: true,
   },
   password: {
-    type: String,
+    type: Array,
     required: true,
   },
 });
