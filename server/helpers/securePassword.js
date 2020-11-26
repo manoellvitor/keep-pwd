@@ -17,7 +17,7 @@ const encrypt = (pwd) => {
 };
 
 const decrypt = (hash) => {
-
+    console.log(hash)
     const decipher = crypto.createDecipheriv(algorithm, secretKey, Buffer.from(hash.iv, 'hex'));
 
     const decrpyted = Buffer.concat([decipher.update(Buffer.from(hash.content, 'hex')), decipher.final()]);

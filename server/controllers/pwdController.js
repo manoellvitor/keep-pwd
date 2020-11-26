@@ -1,5 +1,7 @@
 const boom = require("@hapi/boom");
-const securePassword = require("../helpers/securePassword")
+const Cryptr = require("cryptr");
+const cryptr = new Cryptr(process.env.KEY);
+//const securePassword = require("../helpers/securePassword")
 
 // Getting the Model
 const Pwd = require("../models/Pwd");
@@ -18,15 +20,15 @@ exports.getPasswords = async (req, res) => {
 exports.getPasswordById = async (req, res) => {
   try {
     const password = await Pwd.findById(req.params.id);
-    console.log(password)
-    const rawPassword = await securePassword.decrypt(password)
-    console.log(rawPassword)
     if (password == null) {
       return res.status(404).json({
         Message: "Cant find password...",
       });
     }else {
     res.json(password);
+    // NEED TO WORK ON THIS LOGIC
+    const rawPassword = await cryptr.decrypt(password.password);
+    console.log(rawPassword);
     }
   } catch (err) {
     throw boom.boomify(err);
@@ -37,7 +39,7 @@ exports.getPasswordById = async (req, res) => {
 exports.addPassword = async (req, res) => {
   try {
     const password = req.body;
-    const encryptedPwd = securePassword.encrypt(password.password);
+    const encryptedPwd = cryptr.encrypt(password.password);
     const newPassword = await new Pwd({title: password.title, description: password.description, password: encryptedPwd});
     newPassword.save();
     res.status(201).json({
