@@ -31,6 +31,15 @@ router.post("/addPassword", async (req, res) => {
   }
 });
 
+// Update Password
+router.patch("/updatePassword/:id", async (req, res) => {
+  try {
+    await pwdController.updatePassword(req, res);
+  } catch (err) {
+    throw boom.boomify(err);
+  }
+});
+
 // Delete especifique Password
 router.delete("/deletePassword/:id", async (req, res) => {
   try {

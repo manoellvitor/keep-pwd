@@ -50,6 +50,24 @@ exports.addPassword = async (req, res) => {
   }
 };
 
+// Update Especifique Password
+exports.updatePassword = async (req, res) => {
+    const id = req.params === undefined ? req.id : req.params.id;
+    const newPassword = req.body;
+    newPassword.password = cryptr.encrypt(newPassword.password);
+    if(id == null) {
+        res.status(400).json({
+            Message: "Password not found..."
+        });
+    }else {
+        const updatedPassword = await Pwd.findByIdAndUpdate(id, newPassword, { new: true });
+        res.status(200).json({
+            Message: "Password Updated..."
+        });
+    }
+    
+}
+
 // Delete especifique Password
 exports.deletePassword = async (req, res) => {
   try {
