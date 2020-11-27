@@ -70,19 +70,22 @@ exports.updatePassword = async (req, res) => {
 
 // Delete especifique Password
 exports.deletePassword = async (req, res) => {
-  try {
-    const id = req.params === undefined ? req.id : req.params.id;
-    const password = await Pwd.findByIdAndDelete(id);
-    if (password) {
-      res.status(200).json({
-        Message: "Password Deleted!",
-      });
-    } else {
-      res.status(404).json({
-        Message: "Cant find Password...",
-      });
+    const passwordId = req.params.id;
+
+    try {
+        const password = await Pwd.findById(passwordId);
+        if(password == null){
+            res.status(404).json({
+                Message: "Password not found..."
+            });
+        }else {
+            const deletedPassword = await Pwd.findByIdAndDelete(passwordId);
+            res.status(200).json({
+                Message: "Password Deleted"
+            });
+        }
+    } catch (err) {
+        throw boom.boomify(err);
     }
-  } catch (err) {
-    throw boom.boomify(err);
-  }
+
 };
