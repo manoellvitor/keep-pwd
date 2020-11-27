@@ -23,7 +23,7 @@ app.use("/api/v1.0", pwdRoutes);
 // Defining the Server
 const startServer = () => {
     try {
-        app.listen(process.env.PORT | 3000, () => {
+        app.listen(process.env.PORT || 3000, () => {
             console.log(`Server Running at: http://localhost:${process.env.PORT}`);
         });
     } catch (err) {
