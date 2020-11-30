@@ -1,19 +1,20 @@
-const mongoose = require("mongoose");
+const mongoose = require( "mongoose" );
+const Schema = mongoose.Schema;
 
 // Password Schema
-const passwordSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+const PasswordSchema = new mongoose.Schema( {
+    title: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: true,
+    },
+    password: {
+        type: String,
+        required: true,
+    },
+}, { timestamps: true } );
 
-module.exports = mongoose.model("Pwd", passwordSchema);
+module.exports = mongoose.model( "Pwd", PasswordSchema );
