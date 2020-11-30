@@ -21,7 +21,9 @@ app.use( cors() );
 
 // Routes
 const pwdRoutes = require( "./routes/pwdRouter" );
-app.use( "/api/v1.0", pwdRoutes );
+const userRoutes = require( "./routes/userRouter" );
+app.use( "/api/v1.2", pwdRoutes );
+app.use( "/api/v1.2", userRoutes );
 
 // Defining the Server
 const startServer = () => {
