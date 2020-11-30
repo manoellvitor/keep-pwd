@@ -11,6 +11,10 @@ const validateLoginInput = require( "../helpers/validation/login" );
 // Load User model
 const User = require( "../models/User" );
 
+// .ENV file to keep all the configure wee need
+require( "dotenv" ).config();
+
+// Register an User
 exports.register = async ( req, res ) => {
     // Form validation
     const { errors, isValid } = validateRegisterInput( req.body );
@@ -43,5 +47,55 @@ exports.register = async ( req, res ) => {
                 } );
             } );
         }
+    } );
+};
+
+// Login an User
+exports.login = async ( req, res ) => {
+    // Form validation
+    const { errors, isValid } = validateLoginInput( req.body );
+
+    // Check validation
+    if ( !isValid ) {
+        return res.status( 400 ).json( errors );
+    }
+
+    const email = req.body.email;
+    const password = req.body.password;
+
+    User.findOne( { email } ).then( user => {
+        // check if User exists
+        if ( !user ) {
+            return res.status( 400 ).json( { EmailNotFound: "Email not found" } );
+        }
+
+        // Check password
+        bcrypt.compare( password, user.password ).then( isMatch => {
+            if ( isMatch ) {
+                // User matched
+                // Create JWT Payload
+                const payload = {
+                    id: user.id,
+                    name: user.name
+                };
+
+                // Sign token
+                jwt.sign(
+                    payload,
+                    process.env.KEY,
+                    {
+                        expiresIn: 31556926 // 1 year in seconds
+                    },
+                    ( err, token ) => {
+                        res.json( {
+                            success: true,
+                            token: "Bearer " + token
+                        } );
+                    }
+                );
+            } else {
+                return res.status( 400 ).json( { PasswordIncorrect: "Password incorrect" } );
+            }
+        } );
     } );
 };

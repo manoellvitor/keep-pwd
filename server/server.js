@@ -4,6 +4,7 @@ const cors = require( "cors" );
 const bodyParser = require( "body-parser" );
 const boom = require( "@hapi/boom" );
 const connectDatabase = require( "./Database" );
+const passport = require( "passport" );
 
 // .ENV file to keep all the configure wee need
 require( "dotenv" ).config();
@@ -18,6 +19,7 @@ app.use( bodyParser.urlencoded( {
 } ) );
 app.use( bodyParser.json() );
 app.use( cors() );
+app.use( passport.initialize() );
 
 // Routes
 const pwdRoutes = require( "./routes/pwdRouter" );
@@ -42,3 +44,5 @@ startServer();
 
 // Connect to Database
 connectDatabase();
+
+require( "./helpers/passport" )( passport );

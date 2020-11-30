@@ -12,4 +12,13 @@ router.post( "/register", async ( req, res ) => {
     }
 } );
 
+// Login User
+router.post( "/login", async ( req, res ) => {
+    try {
+        await userController.login( req, res );
+    } catch ( err ) {
+        throw boom.boomify( err );
+    }
+} );
+
 module.exports = router;
