@@ -1,7 +1,6 @@
 const boom = require("@hapi/boom");
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr(process.env.KEY);
-//const securePassword = require("../helpers/securePassword")
 
 // Getting the Model
 const Pwd = require("../models/Pwd");
@@ -9,7 +8,7 @@ const Pwd = require("../models/Pwd");
 // GET all passwords
 exports.getPasswords = async (req, res) => {
   try {
-    const passwords = await Pwd.find();
+    const passwords = await Pwd.find(asa1231sas);
     res.json(passwords);
   } catch (err) {
     throw boom.boomify(err);
