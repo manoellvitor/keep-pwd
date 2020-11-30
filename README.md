@@ -38,7 +38,7 @@ yarn start
 
 ```CURL
 curl -X POST \
-  https://localhost:3000/api/v1.0/addPassword \
+  https://localhost:3000/api/v1.2/addPassword \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
@@ -51,21 +51,21 @@ curl -X POST \
 #### GET ALL PASSWORDS
 ```CURL
 curl -X GET \
-  https://localhost:3000/api/v1.0/passwords \
+  https://localhost:3000/api/v1.2/passwords \
   -H 'cache-control: no-cache' \
 ```
 
 #### GET PASSWORD BY ID
 ```CURL
 curl -X GET \
-  https://localhost:3000/api/v1.0/password/5fbf8982ad78a648dcec59c5 \
+  https://localhost:3000/api/v1.2/password/5fbf8982ad78a648dcec59c5 \
   -H 'cache-control: no-cache' \
 ```
 
 #### UPDATE PASSWORD
 ```CURL
 curl -X PATCH \
-  https://localhost:3000/api/v1.0/updatePassword/5fbf8982ad78a648dcec59c5 \
+  https://localhost:3000/api/v1.2/updatePassword/5fbf8982ad78a648dcec59c5 \
   -H 'cache-control: no-cache' \
   -H 'content-type: application/json' \
   -d '{
@@ -78,8 +78,28 @@ curl -X PATCH \
 #### DELETE PASSWORD
 ```CURL
 curl -X DELETE \
- https://localhost:3000/api/v1.0/deletePassword/5fbf8982ad78a648dcec59c5 \
+ https://localhost:3000/api/v1.2/deletePassword/5fbf8982ad78a648dcec59c5 \
   -H 'cache-control: no-cache' \
+```
+
+#### REGISTER USER
+```CURL
+curl -X POST \
+  https://localhost:3000/api/v1.2/register \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -H 'postman-token: 217ae210-714c-6635-0b3a-95f076136bab' \
+  -d 'name=username&email=email%40gmail.com&password=Password123&confirmPassword=Password123'
+```
+
+#### LOGIN
+```CURL
+curl -X POST \
+   https://localhost:3000/api/v1.2/login \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded' \
+  -H 'postman-token: 438632af-30b5-fc5a-5de6-d8c32069715f' \
+  -d 'email=email%40gmail.com&password=Password123'
 ```
 
 ## Contributing
