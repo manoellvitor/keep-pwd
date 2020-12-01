@@ -23,7 +23,7 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
-    "proxy": "https://3000-dff72f0b-1fc9-46f8-b8bf-eea530b4984b.ws-eu01.gitpod.io:5000",
+    "proxy": "http://localhost:5000",
     "eslintConfig": {
         "extends": [
             "react-app",
