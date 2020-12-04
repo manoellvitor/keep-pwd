@@ -30,7 +30,7 @@ app.use( "/api/v1.2", userRoutes );
 // Defining the Server
 const startServer = () => {
     try {
-        app.listen( process.env.PORT || 3000, () => {
+        app.listen( process.env.PORT || 5000, () => {
             console.log( `Server Running at: http://localhost:${ process.env.PORT }` );
         } );
     } catch ( err ) {
